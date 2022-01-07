@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sentry-filestore-data
+  namespace: devops
+spec:
+  storageClassName: prometheus-data
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
