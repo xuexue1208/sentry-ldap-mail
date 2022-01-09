@@ -218,6 +218,7 @@ externalPostgresql:
   username: postgres
   password: devops@123
 externalRedis:
+  ##使用标准版,否则报错不支持LUA
   host: r-wz9yndboj0e2t53oi6.redis.rds.aliyuncs.com
   port: 6379
   password: devops@123
@@ -747,13 +748,13 @@ nginx:
       repository: bitnami/nginx-ldap-auth-daemon
       tag: 0.20200116.0-debian-10-r382
     ldapConfig:
-      baseDN: "ou=people,dc=corp,dc=xhey,dc=top"
-      bindDN: "cn=admin,dc=corp,dc=xhey,dc=top"
-      bindPassword: "Sway@1234"
-      filter: "(uid=%(username)s)"
+      baseDN: ""
+      bindDN: ""
+      bindPassword: ""
+      filter: ""
       httpCookieName: ""
       httpRealm: ""
-      uri: "ldap://172.18.168.235:389"
+      uri: ""
     livenessProbe:
       enabled: true
       failureThreshold: 6
@@ -780,16 +781,16 @@ nginx:
           ###############################################################
 
           # URL and port for connecting to the LDAP server
-          proxy_set_header X-Ldap-URL "ldap://172.18.168.235:389";
+          #proxy_set_header X-Ldap-URL "";
 
           # Base DN
-          proxy_set_header X-Ldap-BaseDN "ou=people,dc=corp,dc=xhey,dc=top";
+          #proxy_set_header X-Ldap-BaseDN "";
 
           # Bind DN
-          proxy_set_header X-Ldap-BindDN "cn=admin,dc=corp,dc=xhey,dc=top";
+          #proxy_set_header X-Ldap-BindDN "";
 
           # Bind password
-          proxy_set_header X-Ldap-BindPass "Sway@1234";
+          #proxy_set_header X-Ldap-BindPass "";
       }
       }
     port: 8888
@@ -1347,7 +1348,7 @@ redis:
     password: ""
     sentinel: false
     usePasswordFiles: false
-  clusterDomain: cluster.local
+  clusterDomain: xhey-k8s.com
   common:
     exampleValue: common-chart
     global:
@@ -1378,7 +1379,7 @@ redis:
     imageRegistry: ""
     redis:
       password: ""
-    storageClass: ""
+    storageClass: "prometheus-data"
   image:
     debug: false
     pullPolicy: IfNotPresent
@@ -1991,3 +1992,5 @@ user:
   create: true
   email: admin@sentry.local
   password: aaaa
+####  wB8Baxut1u4GOQF3CWfhp4x3thjv2gXw4wGGtjWH1Stp1RwSVj
+####  system.secret-key: {{ .Values.system.secretKey | default (randAlphaNum 50) | quote }}

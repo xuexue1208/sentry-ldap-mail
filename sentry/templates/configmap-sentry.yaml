@@ -135,7 +135,8 @@ data:
     import ldap
     from django_auth_ldap.config import LDAPSearch, GroupOfUniqueNamesType
 
-    AUTH_LDAP_SERVER_URI = 'ldap://172.18.168.235'
+    #AUTH_LDAP_SERVER_URI = 'ldap://openldap.devops:389'
+    AUTH_LDAP_SERVER_URI = 'ldap://ldap-auth.xhey.top:8000'
     AUTH_LDAP_BIND_DN = 'cn=admin,dc=corp,dc=xhey,dc=top'
     AUTH_LDAP_BIND_PASSWORD = 'Sway@1234'
 
